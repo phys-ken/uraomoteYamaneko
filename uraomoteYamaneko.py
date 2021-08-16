@@ -93,8 +93,8 @@ class Application(tkinter.Frame):
     def create_widgets(self):
         global img
         # pyinstallerの時には、specに以下の行を追加
-        # a.datas += [("top.png" , "appfigs/top.png" , "DATA")]
-        img = Image.open(resource_path('./appfigs/top.png'))
+        # a.datas += [("top.png" , "./appfigs/top.png" , "DATA")]
+        img = Image.open(resource_path('top.png'))
         img = ImageTk.PhotoImage(img)
  
         self.canvas = tkinter.Canvas(bg="white", width=300, height=300)
