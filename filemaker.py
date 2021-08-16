@@ -1,3 +1,6 @@
+
+## 裏表割り振りができているか点検するために、大量に画像を作成するPythonスクリプトです。
+
 import os
 import sys
 import shutil

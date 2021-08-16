@@ -15,6 +15,10 @@ ret = 0
 global flag
 flag = True
 
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 def modosu():
     if ret == 0:
@@ -88,7 +92,9 @@ class Application(tkinter.Frame):
 
     def create_widgets(self):
         global img
-        img = Image.open('./appfigs/top.png')
+        # pyinstallerの時には、specに以下の行を追加
+        # a.datas += [("top.png" , "appfigs/top.png" , "DATA")]
+        img = Image.open(resource_path('./appfigs/top.png'))
         img = ImageTk.PhotoImage(img)
  
         self.canvas = tkinter.Canvas(bg="white", width=300, height=300)
