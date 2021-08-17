@@ -26,6 +26,11 @@ def modosu():
         messagebox.showerror("エラー","まずはフォルダを選択してください")
       return 0
     oyapath = ret
+    
+    if not os.path.isdir(oyapath + "/omote"):
+      messagebox.showerror("エラー","もとに戻す画像がありません")
+      return 0
+
     kopaths = []
     kopaths.append(oyapath + "/omote")
     kopaths.append(oyapath + "/ura")
@@ -115,15 +120,24 @@ class Application(tkinter.Frame):
         self.modosu_button = tkinter.Button(self, text='振り分けた画像を戻す', command=modosu, width=30,height=3).pack(anchor=tkinter.NW)
         global flag
         flag = False
+
 def file_open():
     global ret
     global flag
     ini_dir = './'
     ret = tkinter.filedialog.askdirectory(initialdir=ini_dir, title='画像の入ったフォルダを選択してください', mustexist = True)
-
+    print(ret)
+    print(len(ret))
     if not len(ret) == 0:    
       app.text_1.set("フォルダ名:" + str(ret))
       app.text_2.set("処理の種類を選択してニャ")
+      flag = True
+    else:
+      print("ファイルが選択されていません。")
+      app.text_1.set("ファイルを選択してニャ")
+      app.text_2.set("")
+      ret = 0
+      flag = False
 
 root = tkinter.Tk()
 app = Application(master=root)
